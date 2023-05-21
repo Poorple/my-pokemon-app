@@ -1,6 +1,7 @@
-import "./App.css";
+import DataFetching from "./DataFetching";
 import SearchBar from "./SearchBar";
 import "./search-bar-style.css";
+/* import SearchResultsList from "./SearchResultsList"; */
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <div>
         <h1>PoKeDex</h1>
         <SearchBar />
+        <DataFetching />
       </div>
     </>
   );
