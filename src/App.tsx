@@ -1,6 +1,7 @@
 import "./search-bar-style.css";
 import { useState, useMemo, useEffect } from "react";
 import axios from "axios";
+import PokemonCardList from "./components/PokemonListCard";
 
 function App() {
   interface Pkmn {
@@ -52,18 +53,23 @@ function App() {
       return item.name.toLowerCase().includes(query.toLowerCase());
     });
   }, [pokemon, query]);
+  console.log(filteredItems);
   return (
     <>
       <div>
         <h1>PoKeDex</h1>
         <input
+          className="search-input"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           type="search"
           placeholder="Search.."
         />
         <h3>Pokemon:</h3>
-        <div></div>
+
+        <PokemonCardList
+          filteredItems={query.length >= 3 ? filteredItems : []}
+        />
       </div>
     </>
   );
