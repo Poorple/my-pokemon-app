@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
-import React from "react";
 import PokemonCardList from "./components/PokemonListCard";
+import "./search-bar-style.css";
 
 const FetchAndFilter = () => {
   interface Pkmn {
