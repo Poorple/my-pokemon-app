@@ -1,4 +1,32 @@
-img {
-  max-width: 1.25rem;
-  max-height: 1.25rem;
+h1 {
+  text-align: center;
+}
+
+.search-bar {
+  margin: 0 auto;
+}
+.search-bar input {
+  text-align: center;
+  position: relative;
+  background-color: white;
+  border-radius: 0.8rem;
+  height: 2.5rem;
+  padding: 0 1rem;
+  box-shadow: 0px 0px 8px #ddd;
+  display: flex;
+  background-color: transparent;
+  border: none;
+  font-size: 1.25rem;
+}
+.search-bar input:focus {
+  outline: none;
+}
+.search-bar ul {
+  list-style-type: none;
+  text-align: center;
+  margin: 0 auto;
+}
+.search-bar ul li img {
+  max-width: 1.5rem;
+  max-height: 1.5rem;
 }/*# sourceMappingURL=pokemon-card-style.css.map */

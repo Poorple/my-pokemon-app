@@ -1,8 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import PokemonCardList from "./components/PokemonListCard";
-import "./search-bar-style.css";
-
+import "./pokemon-card-style.css";
 const FetchAndFilter = () => {
   interface Pkmn {
     id: number;
@@ -56,7 +55,7 @@ const FetchAndFilter = () => {
   console.log(filteredItems);
 
   return (
-    <>
+    <div className="search-bar">
       <input
         className="search-input"
         value={query}
@@ -65,7 +64,7 @@ const FetchAndFilter = () => {
         placeholder="Search.."
       />
       <PokemonCardList filteredItems={query.length >= 3 ? filteredItems : []} />
-    </>
+    </div>
   );
 };
 
