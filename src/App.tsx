@@ -1,5 +1,3 @@
-import "./search-bar-style.css";
-import PokemonCardList from "./components/PokemonListCard";
 import FetchAndFilter from "./FetchAndFilter";
 
 function App() {

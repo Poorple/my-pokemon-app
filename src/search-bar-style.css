@@ -2,7 +2,7 @@ h1 {
   text-align: center;
 }
 
-.searchbar {
+.search-input {
   background-color: white;
   border-radius: 0.8rem;
   height: 2.5rem;
@@ -10,7 +10,7 @@ h1 {
   box-shadow: 0px 0px 8px #ddd;
   display: flex;
 }
-.searchbar input {
+.search-input input {
   background-color: transparent;
   border: none;
   height: 100%;
@@ -18,7 +18,7 @@ h1 {
   width: 100%;
   margin-left: 0.33rem;
 }
-.searchbar input:focus {
+.search-input input:focus {
   outline: none;
 }
 
