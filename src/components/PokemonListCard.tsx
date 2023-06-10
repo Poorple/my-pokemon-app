@@ -1,5 +1,3 @@
-import React from "react";
-
 const PokemonCardList = ({ filteredItems }: Array<[]>) => {
   return (
     <ul className="pkmn-list">
