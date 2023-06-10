@@ -1,8 +1,8 @@
-const PokemonCardList = ({ filteredItems }: Array<[]>) => {
+const PokemonCardList = ({ filteredItems }: any) => {
   return (
     <ul className="pkmn-list">
       {filteredItems.map((item: any) => (
-        <li>
+        <li key={item.id}>
           <p>{item.name}</p>
           <p>#{item.id}</p>
           {item.id < 10 ? (
