@@ -1,10 +1,9 @@
+import "../type-colors.scss";
 const PokemonCardList = ({ filteredItems }: any) => {
   return (
-    <ul className="pkmn-list">
+    <div className="pkmn-cards">
       {filteredItems.map((item: any) => (
-        <li key={item.id}>
-          <p>{item.name}</p>
-          <p>#{item.id}</p>
+        <article key={item.id}>
           {item.id < 10 ? (
             <img
               src={`https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/00${item.id}.png`}
@@ -21,9 +20,19 @@ const PokemonCardList = ({ filteredItems }: any) => {
               loading="lazy"
             />
           )}
-        </li>
+          <p className="nameNhash">
+            {item.name} #{item.id}
+          </p>
+          <div className="typebox">
+            {item.type.map((kind: any) => (
+              <p className={`type ${kind.toLowerCase()}`} key={kind.id}>
+                {kind}
+              </p>
+            ))}
+          </div>
+        </article>
       ))}
-    </ul>
+    </div>
   );
 };
 export default PokemonCardList;

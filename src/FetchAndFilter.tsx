@@ -55,16 +55,18 @@ const FetchAndFilter = () => {
   console.log(filteredItems);
 
   return (
-    <div className="search-bar">
-      <input
-        className="search-input"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        type="search"
-        placeholder="Search.."
-      />
-      <PokemonCardList filteredItems={query.length >= 3 ? filteredItems : []} />
-    </div>
+    <>
+      <div className="search-bar">
+        <input
+          className="search-input"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          type="search"
+          placeholder="Search.."
+        />
+      </div>
+      <PokemonCardList filteredItems={query.length > 0 ? filteredItems : []} />
+    </>
   );
 };
 
