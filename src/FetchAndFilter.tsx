@@ -2,6 +2,8 @@ import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import PokemonCardList from "./components/PokemonListCard";
 import "./pokemon-card-style.css";
+import TypeFilter from "./TypeFilter";
+
 const FetchAndFilter = () => {
   interface Pkmn {
     id: number;
@@ -43,17 +45,28 @@ const FetchAndFilter = () => {
 
   useEffect(() => {
     fetchData();
-    console.log(pokemon);
   }, []);
+
   const [query, setQuery] = useState("");
 
+  //Return updated array based on input change
   const filteredItems = useMemo(() => {
     return pokemon.filter((item) => {
       return item.name.toLowerCase().includes(query.toLowerCase());
     });
   }, [pokemon, query]);
-  console.log(filteredItems);
 
+  //Wanted type filter state
+  const [filterType, setFilterType] = useState([]);
+
+  console.log(filterType);
+  //Title Change
+  function Title() {
+    useEffect(() => {
+      document.title = "Pokédex Copycat";
+    }, []);
+  }
+  Title();
   return (
     <>
       <div className="search-bar">
@@ -65,7 +78,11 @@ const FetchAndFilter = () => {
           placeholder="Search.."
         />
       </div>
-      <PokemonCardList filteredItems={query.length > 0 ? filteredItems : []} />
+      <TypeFilter setWantedTypes={setFilterType} />
+      <PokemonCardList
+        filterType={filterType.length > 0 ? filterType : []}
+        filteredItems={query.length > 0 ? filteredItems : []}
+      />
     </>
   );
 };

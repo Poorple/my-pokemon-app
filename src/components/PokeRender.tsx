@@ -1,8 +1,4 @@
-import "../type-colors.scss";
-
-const PokemonCardList = ({ filterType, filteredItems }: any) => {
-  console.log(filterType);
-
+const PokeRender = () => {
   return (
     <div className="pkmn-cards">
       {filteredItems.map((item: any) => (
@@ -38,4 +34,4 @@ const PokemonCardList = ({ filterType, filteredItems }: any) => {
     </div>
   );
 };
-export default PokemonCardList;
+export default PokeRender;

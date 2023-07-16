@@ -4,7 +4,7 @@ function App() {
   return (
     <>
       <div>
-        <h1>PoKédex</h1>
+        <h1>Pokédex</h1>
         <FetchAndFilter />
       </div>
     </>
