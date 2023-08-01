@@ -81,10 +81,11 @@ h1{
     .search-bar{
     input{
         width:auto;
-        margin-left:3rem;
+        margin-left:4rem;
     }}
 
     .pkmn-cards{
+        margin-top:1rem;
         grid-template-columns:1fr;                    
         align-items: center;
     }

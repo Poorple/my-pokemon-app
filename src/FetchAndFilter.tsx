@@ -55,11 +55,14 @@ const FetchAndFilter = () => {
       return item.name.toLowerCase().includes(query.toLowerCase());
     });
   }, [pokemon, query]);
-
   //Wanted type filter state
-  const [filterType, setFilterType] = useState([]);
+  const [dataFromChildA, setDataFromChildA] = useState("");
 
-  console.log(filterType);
+  const receiveDataFromChildA = (data: any) => {
+    setDataFromChildA(data);
+  };
+  console.log(dataFromChildA);
+
   //Title Change
   function Title() {
     useEffect(() => {
@@ -78,9 +81,9 @@ const FetchAndFilter = () => {
           placeholder="Search.."
         />
       </div>
-      <TypeFilter setWantedTypes={setFilterType} />
+      <TypeFilter sendDataToParent={receiveDataFromChildA} />
       <PokemonCardList
-        filterType={filterType.length > 0 ? filterType : []}
+        filterType={dataFromChildA.length > 0 ? dataFromChildA : []}
         filteredItems={query.length > 0 ? filteredItems : []}
       />
     </>

@@ -1,6 +1,6 @@
 import "./type-colors.scss";
 import "./type-filter-style.scss";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const selectedTypeArray: Array<Element> = [];
 let wantedTypeArray: Array<string> = [];
@@ -11,7 +11,7 @@ const ActivateFilter = () => {
     filterBox.classList.toggle("visible");
   }
 };
-const TypeSelect = (event: React.MouseEvent<HTMLParagraphElement>) => {
+const TypeSelect = (event: React.MouseEvent<HTMLButtonElement>) => {
   event.currentTarget.classList.toggle("selected");
   typeReturn();
 };
@@ -32,9 +32,9 @@ const typeReturn = () => {
     }
     return x.textContent || "";
   });
-  console.log(selectedTypeArray);
+  console.log(wantedTypeArray);
 };
-
+console.log(wantedTypeArray);
 const ClearFilter = () => {
   const paraSelect = document.querySelectorAll(".type");
   for (let para of paraSelect) {
@@ -45,71 +45,75 @@ const ClearFilter = () => {
   selectedTypeArray.length = 0;
 };
 
-const TypeFilter = ({ setWantedTypes }: any) => {
-  const wantedTypes: Element[] = selectedTypeArray;
+const TypeFilter = ({ sendDataToParent }: any) => {
+  const [filterType, setFilterType] = useState<any[]>([]);
   useEffect(() => {
-    setWantedTypes(wantedTypes);
-  }, []);
+    setFilterType(wantedTypeArray);
+
+    console.log(filterType);
+  }, [wantedTypeArray]);
+  sendDataToParent(filterType);
+
   return (
     <>
       <button onClick={ActivateFilter} className="button-filter">
         Type Filter
       </button>
       <div className="type-filter">
-        <p className="type normal" onClick={TypeSelect}>
+        <button className="type normal" onClick={TypeSelect}>
           Normal
-        </p>
-        <p className="type fire" onClick={TypeSelect}>
+        </button>
+        <button className="type fire" onClick={TypeSelect}>
           Fire
-        </p>
-        <p className="type water" onClick={TypeSelect}>
+        </button>
+        <button className="type water" onClick={TypeSelect}>
           Water
-        </p>
-        <p className="type grass" onClick={TypeSelect}>
+        </button>
+        <button className="type grass" onClick={TypeSelect}>
           Grass
-        </p>
-        <p className="type electric" onClick={TypeSelect}>
+        </button>
+        <button className="type electric" onClick={TypeSelect}>
           Electric
-        </p>
-        <p className="type ice" onClick={TypeSelect}>
+        </button>
+        <button className="type ice" onClick={TypeSelect}>
           Ice
-        </p>
-        <p className="type fighting" onClick={TypeSelect}>
+        </button>
+        <button className="type fighting" onClick={TypeSelect}>
           Fighting
-        </p>
-        <p className="type poison" onClick={TypeSelect}>
+        </button>
+        <button className="type poison" onClick={TypeSelect}>
           Poison
-        </p>
-        <p className="type ground" onClick={TypeSelect}>
+        </button>
+        <button className="type ground" onClick={TypeSelect}>
           Ground
-        </p>
-        <p className="type flying" onClick={TypeSelect}>
+        </button>
+        <button className="type flying" onClick={TypeSelect}>
           Flying
-        </p>
-        <p className="type psychic" onClick={TypeSelect}>
+        </button>
+        <button className="type psychic" onClick={TypeSelect}>
           Psychic
-        </p>
-        <p className="type bug" onClick={TypeSelect}>
+        </button>
+        <button className="type bug" onClick={TypeSelect}>
           Bug
-        </p>
-        <p className="type rock" onClick={TypeSelect}>
+        </button>
+        <button className="type rock" onClick={TypeSelect}>
           Rock
-        </p>
-        <p className="type ghost" onClick={TypeSelect}>
+        </button>
+        <button className="type ghost" onClick={TypeSelect}>
           Ghost
-        </p>
-        <p className="type dark" onClick={TypeSelect}>
+        </button>
+        <button className="type dark" onClick={TypeSelect}>
           Dark
-        </p>
-        <p className="type dragon" onClick={TypeSelect}>
+        </button>
+        <button className="type dragon" onClick={TypeSelect}>
           Dragon
-        </p>
-        <p className="type steel" onClick={TypeSelect}>
+        </button>
+        <button className="type steel" onClick={TypeSelect}>
           Steel
-        </p>
-        <p className="type fairy" onClick={TypeSelect}>
+        </button>
+        <button className="type fairy" onClick={TypeSelect}>
           Fairy
-        </p>
+        </button>
         <button onClick={ClearFilter}>Clear selected</button>
       </div>
     </>
