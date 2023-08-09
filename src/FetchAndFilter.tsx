@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
-import PokemonCardList from "./components/PokemonListCard";
+import PokemonCardListComponent from "./components/PokemonCardListComponent";
 import "./pokemon-card-style.css";
 import TypeFilter from "./TypeFilter";
 
@@ -42,7 +42,7 @@ const FetchAndFilter = () => {
       console.error("Error fetching data:", error);
     }
   };
-
+  //Get data on load
   useEffect(() => {
     fetchData();
   }, []);
@@ -56,20 +56,21 @@ const FetchAndFilter = () => {
     });
   }, [pokemon, query]);
   //Wanted type filter state
-  const [dataFromChildA, setDataFromChildA] = useState("");
+  const [PokemonTypeFromTypeComponent, setPokemonTypeFromTypeComponent] =
+    useState<string[]>([]);
 
-  const receiveDataFromChildA = (data: any) => {
-    setDataFromChildA(data);
+  const receivePokemonTypeFromTypeComponent = (data: any) => {
+    setPokemonTypeFromTypeComponent(data);
   };
-  console.log(dataFromChildA);
 
+  useEffect(() => {
+    console.log(PokemonTypeFromTypeComponent);
+  }, [PokemonTypeFromTypeComponent]);
   //Title Change
-  function Title() {
-    useEffect(() => {
-      document.title = "Pokédex Copycat";
-    }, []);
-  }
-  Title();
+  useEffect(() => {
+    document.title = "Pokédex Copycat";
+  }, []);
+
   return (
     <>
       <div className="search-bar">
@@ -81,9 +82,11 @@ const FetchAndFilter = () => {
           placeholder="Search.."
         />
       </div>
-      <TypeFilter sendDataToParent={receiveDataFromChildA} />
-      <PokemonCardList
-        filterType={dataFromChildA.length > 0 ? dataFromChildA : []}
+      <TypeFilter
+        sendPokemonTypeToFetchComponent={receivePokemonTypeFromTypeComponent}
+      />
+      <PokemonCardListComponent
+        filterType={PokemonTypeFromTypeComponent}
         filteredItems={query.length > 0 ? filteredItems : []}
       />
     </>

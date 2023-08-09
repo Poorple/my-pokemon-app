@@ -40,6 +40,7 @@ h1{
             transform: translate(130%,-113%);
         }}
 .pkmn-cards{
+    margin-top:1rem;
     font-family: "Pixel";
     display:grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -84,8 +85,7 @@ h1{
         margin-left:4rem;
     }}
 
-    .pkmn-cards{
-        margin-top:1rem;
+    .pkmn-cards{        
         grid-template-columns:1fr;                    
         align-items: center;
     }

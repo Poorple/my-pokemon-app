@@ -2,57 +2,56 @@ import "./type-colors.scss";
 import "./type-filter-style.scss";
 import { useEffect, useState } from "react";
 
-const selectedTypeArray: Array<Element> = [];
-let wantedTypeArray: Array<string> = [];
+const TypeFilter = ({ sendPokemonTypeToFetchComponent }: any) => {
+  const selectedTypeArray: Array<Element> = [];
+  let wantedTypeArray: Array<string> = [];
+  const [PokemonTypeState, setPokemontypestate] = useState<string[]>();
 
-const ActivateFilter = () => {
-  const filterBox = document.querySelector(".type-filter");
-  if (filterBox !== null) {
-    filterBox.classList.toggle("visible");
-  }
-};
-const TypeSelect = (event: React.MouseEvent<HTMLButtonElement>) => {
-  event.currentTarget.classList.toggle("selected");
-  typeReturn();
-};
-
-const typeReturn = () => {
-  const selectedType = document.querySelectorAll(".type");
-  const selectedTypeArray: Element[] = [];
-
-  for (let chosen of selectedType) {
-    if (chosen.classList.contains("selected")) {
-      selectedTypeArray.push(chosen);
-    } else continue;
-  }
-
-  wantedTypeArray = selectedTypeArray.map((x) => {
-    if (!x.classList.contains("selected")) {
-      selectedTypeArray.splice(selectedTypeArray.indexOf(x), 1);
+  const ActivateFilter = () => {
+    const filterBox = document.querySelector(".type-filter");
+    if (filterBox !== null) {
+      filterBox.classList.toggle("visible");
     }
-    return x.textContent || "";
-  });
-  console.log(wantedTypeArray);
-};
-console.log(wantedTypeArray);
-const ClearFilter = () => {
-  const paraSelect = document.querySelectorAll(".type");
-  for (let para of paraSelect) {
-    if (para.classList.contains("selected")) {
-      para.classList.toggle("selected");
-    } else continue;
-  }
-  selectedTypeArray.length = 0;
-};
+  };
 
-const TypeFilter = ({ sendDataToParent }: any) => {
-  const [filterType, setFilterType] = useState<any[]>([]);
+  const TypeSelect = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.currentTarget.classList.toggle("selected");
+    typeReturn();
+  };
+
+  const typeReturn = () => {
+    const selectedType = document.querySelectorAll(".type");
+    const selectedTypeArray: Element[] = [];
+    for (let chosen of selectedType) {
+      if (chosen.classList.contains("selected")) {
+        selectedTypeArray.push(chosen);
+      } else continue;
+    }
+
+    wantedTypeArray = selectedTypeArray.map((x) => {
+      if (!x.classList.contains("selected")) {
+        selectedTypeArray.splice(selectedTypeArray.indexOf(x), 1);
+      }
+      return x.textContent || "";
+    });
+    setPokemontypestate(wantedTypeArray);
+  };
+
+  const ClearFilter = () => {
+    const paraSelect = document.querySelectorAll(".type");
+    for (let para of paraSelect) {
+      if (para.classList.contains("selected")) {
+        para.classList.toggle("selected");
+      } else continue;
+    }
+    selectedTypeArray.length = 0;
+    wantedTypeArray.length = 0;
+    setPokemontypestate(wantedTypeArray);
+  };
   useEffect(() => {
-    setFilterType(wantedTypeArray);
-
-    console.log(filterType);
+    sendPokemonTypeToFetchComponent(PokemonTypeState);
+    console.log(sendPokemonTypeToFetchComponent);
   }, [wantedTypeArray]);
-  sendDataToParent(filterType);
 
   return (
     <>
