@@ -7,6 +7,7 @@ const TypeFilter = ({ sendPokemonTypeToFetchComponent }: any) => {
   let wantedTypeArray: Array<string> = [];
   const [PokemonTypeState, setPokemontypestate] = useState<string[]>();
 
+  //Show type box
   const ActivateFilter = () => {
     const filterBox = document.querySelector(".type-filter");
     if (filterBox !== null) {
@@ -14,6 +15,7 @@ const TypeFilter = ({ sendPokemonTypeToFetchComponent }: any) => {
     }
   };
 
+  //Assign class to wanted type
   const TypeSelect = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.currentTarget.classList.toggle("selected");
     typeReturn();
@@ -50,7 +52,6 @@ const TypeFilter = ({ sendPokemonTypeToFetchComponent }: any) => {
   };
   useEffect(() => {
     sendPokemonTypeToFetchComponent(PokemonTypeState);
-    console.log(sendPokemonTypeToFetchComponent);
   }, [wantedTypeArray]);
 
   return (
