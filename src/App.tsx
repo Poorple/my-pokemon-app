@@ -1,4 +1,4 @@
-import FetchAndFilter from "./FetchAndFilter";
+import FetchAndFilter from "./components/FetchAndFilter";
 
 function App() {
   return (

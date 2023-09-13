@@ -1,5 +1,5 @@
-import "./type-colors.scss";
-import "./type-filter-style.scss";
+import "./styles/type-colors.scss";
+import "./styles/type-filter-style.scss";
 import { useEffect, useState } from "react";
 
 const TypeFilter = ({ sendPokemonTypeToFetchComponent }: any) => {

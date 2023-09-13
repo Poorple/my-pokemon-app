@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import PokemonCardListComponent from "./components/PokemonCardListComponent";
-import "./pokemon-card-style.css";
+import PokemonCardListComponent from "./PokemonCardListComponent";
+import "./styles/pokemon-card-style.css";
 import TypeFilter from "./TypeFilter";
 
 const FetchAndFilter = () => {
@@ -51,6 +51,7 @@ const FetchAndFilter = () => {
   }, []);
 
   const [query, setQuery] = useState<string>("");
+  const [debouncedInputValue, setDebouncedInputValue] = useState<string>("");
 
   //Wanted type filter state
   const [PokemonTypeFromTypeComponent, setPokemonTypeFromTypeComponent] =
@@ -60,19 +61,6 @@ const FetchAndFilter = () => {
     setPokemonTypeFromTypeComponent(data);
   };
 
-  //Return updated array based on input change and type change
-  /* const filteredItems = useMemo(() => {
-    return pokemon.filter((item) => {
-      if (typeof PokemonTypeFromTypeComponent === "undefined") {
-        return item.name.toLowerCase().includes(query.toLowerCase());
-      } else if (!(typeof PokemonTypeFromTypeComponent === "undefined")) {
-        return (
-          item.name.toLowerCase().includes(query.toLowerCase()) ||
-          item.type.some((type) => PokemonTypeFromTypeComponent.includes(type))
-        );
-      }
-    });
-  }, [pokemon, query, PokemonTypeFromTypeComponent]); */
   let pokemonToBeFiltered = pokemon;
   let filteredPokemon: Pkmn[] = [];
   let listIncludingType: Pkmn[] = [];
@@ -88,7 +76,7 @@ const FetchAndFilter = () => {
         : null;
     });
     setInputFilter(filteredPokemon);
-
+    // If item contains type make an array of Pokemon containing type
     PokemonTypeFromTypeComponent
       ? pokemonToBeFiltered.filter((item) => {
           item.type.some((type) => PokemonTypeFromTypeComponent.includes(type))
@@ -97,8 +85,7 @@ const FetchAndFilter = () => {
         })
       : null;
     finalFilter(filteredPokemon, listIncludingType);
-  }, [query, PokemonTypeFromTypeComponent]);
-  // If item contains type make an array of Pokemon containing type
+  }, [debouncedInputValue, PokemonTypeFromTypeComponent]);
 
   //Filtered list of Pokemon checking type and input and creating new list containing both
   const finalFilter = (filteredPokemon: Pkmn[], listIncludingType: Pkmn[]) => {
@@ -113,21 +100,14 @@ const FetchAndFilter = () => {
     setTheVeryBest(finalFilterList);
     console.log(theVeryBest);
   };
+  // 1 second debounce/delay on input field
+  useEffect(() => {
+    const delayInputTimeoutId = setTimeout(() => {
+      setDebouncedInputValue(query);
+    }, 500);
+    return () => clearTimeout(delayInputTimeoutId);
+  }, [query, 1000]);
 
-  //2.
-
-  //debounce
-  //1. 1 komponenta- svi pokemoni->onMount ✓
-  //2. jos jedan state koji su filtrirani pokemoni ✓
-  //3. filter onChange prima value inputa e.target.value kojeg prima lista filtriraj_mi_pokemone
-  //4. const x ce biti svi pokemoni.filter koji ce bit e.target.value od html elementa
-  //5. na input staviti debounce
-  //6. setFiltriraniPokemoni(x)
-  //7. filter mora ukljucivati i tip isto kako je u losoj verziji napisano
-  //8. jos jedna metoda koja ce filtrirati samo na temelju tipa
-  //9. prva metoda ce primati input i filtrirati na temelju toga i tipa koji je odabran ako je settan
-  //10. druga metoda koja ce se pozivati kada cu odabrati tip i ona ce primati kao argument tip koji sam odabrao i onda filtrira na temelju tipa i naziva ako postoji
-  //11. filtrirana lista koja sadrzi samo tipove
   return (
     <>
       <div className="search-bar">
@@ -153,8 +133,8 @@ const FetchAndFilter = () => {
             ? listIncludingType
             : null
         }
-        filteredPokemon={query.length > 0 ? inputFilter : []}
-        pokemon={query.length == 0 ? pokemon : []}
+        filteredPokemon={debouncedInputValue.length > 0 ? inputFilter : []}
+        pokemon={debouncedInputValue.length == 0 ? pokemon : []}
         finalFilterList={theVeryBest}
       />
     </>
