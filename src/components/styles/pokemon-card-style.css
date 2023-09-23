@@ -135,4 +135,10 @@ h1 {
     grid-template-columns: 1fr;
     align-items: center;
   }
+}
+@media (min-width: 900px) and (max-width: 1200px) {
+  .pkmn-cards {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
 }/*# sourceMappingURL=pokemon-card-style.css.map */

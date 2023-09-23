@@ -133,3 +133,9 @@ h1{
         align-items: center;
     }
 }
+@media (min-width:900px) and (max-width:1200px){
+.pkmn-cards{
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
+}
