@@ -32,11 +32,6 @@ const PokemonCardList = ({
     document.querySelector(".scrollToTop");
   const [scrollPosition, setPosition] = useState(0);
 
-  console.log(pokemon);
-  console.log(filteredPokemon);
-  console.log(filterType);
-  console.log(finalFilterList);
-
   useEffect(() => {
     handleScroll();
     window.addEventListener("scroll", handleScroll);
