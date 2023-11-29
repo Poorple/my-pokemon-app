@@ -38,6 +38,7 @@ const FetchAndFilter = () => {
       }));
 
       setPokemon(fetchedPokemon);
+      console.log(fetchedPokemon);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -47,7 +48,6 @@ const FetchAndFilter = () => {
     if (pokemon.length === 0) {
       fetchData();
     }
-    document.title = "Pokédex Copycat";
   }, []);
 
   const [query, setQuery] = useState<string>("");
@@ -89,7 +89,7 @@ const FetchAndFilter = () => {
 
   //Filtered list of Pokemon checking type and input and creating new list containing both
   const finalFilter = (filteredPokemon: Pkmn[], listIncludingType: Pkmn[]) => {
-    filteredPokemon.length == 0 || listIncludingType.length == 0
+    filteredPokemon.length === 0 || listIncludingType.length === 0
       ? (finalFilterList.length = 0)
       : null;
     filteredPokemon && listIncludingType
@@ -124,18 +124,16 @@ const FetchAndFilter = () => {
       />
       <PokemonCardListComponent
         filterType={
-          filteredPokemon.length == 0
-            ? PokemonTypeFromTypeComponent &&
-              !(typeof PokemonTypeFromTypeComponent === "undefined")
-              ? PokemonTypeFromTypeComponent
-              : null
-            : listIncludingType
-            ? listIncludingType
-            : null
+          PokemonTypeFromTypeComponent &&
+          PokemonTypeFromTypeComponent.length > 0
+            ? { typeArr: PokemonTypeFromTypeComponent }
+            : { typeArr: [] }
         }
-        filteredPokemon={debouncedInputValue.length > 0 ? inputFilter : []}
+        filteredPokemon={
+          debouncedInputValue.length > 0 ? inputFilter || [] : []
+        }
         pokemon={debouncedInputValue.length == 0 ? pokemon : []}
-        finalFilterList={theVeryBest}
+        finalFilterList={theVeryBest ?? []}
       />
     </>
   );

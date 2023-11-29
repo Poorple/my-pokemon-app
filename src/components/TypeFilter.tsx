@@ -2,10 +2,14 @@ import "./styles/type-colors.scss";
 import "./styles/type-filter-style.scss";
 import { useEffect, useState } from "react";
 
-const TypeFilter = ({ sendPokemonTypeToFetchComponent }: any) => {
+interface TypeFilterProps {
+  sendPokemonTypeToFetchComponent: (types: string[]) => void;
+}
+
+const TypeFilter = ({ sendPokemonTypeToFetchComponent }: TypeFilterProps) => {
   const selectedTypeArray: Array<Element> = [];
   let wantedTypeArray: Array<string> = [];
-  const [PokemonTypeState, setPokemontypestate] = useState<string[]>();
+  const [PokemonTypeState, setPokemontypestate] = useState<string[]>([]);
 
   //Show type box
   const ActivateFilter = () => {
