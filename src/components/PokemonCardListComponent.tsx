@@ -2,15 +2,41 @@ import "./styles/type-colors.scss";
 import { useEffect, useState } from "react";
 import { GrLinkTop } from "react-icons/gr";
 
+interface Pokemon {
+  attack: number | undefined;
+  defense: number | undefined;
+  hp: number | undefined;
+  id: number;
+  name: string;
+  spattack: number | undefined;
+  spdefense: number | undefined;
+  speed: number | undefined;
+  type: string[];
+}
+type PokemonType = string;
+
+interface combinedInterface {
+  pokemon: Pokemon[];
+  filteredPokemon: Pokemon[];
+  filterType: { typeArr: string[] };
+  finalFilterList: Pokemon[];
+}
+
 const PokemonCardList = ({
   pokemon,
-  filteredPokemon = [],
-  filterType = [],
-  finalFilterList = [],
-}: any) => {
+  filteredPokemon,
+  filterType,
+  finalFilterList,
+}: combinedInterface) => {
   const btnTopSelector: HTMLElement | null =
     document.querySelector(".scrollToTop");
   const [scrollPosition, setPosition] = useState(0);
+
+  console.log(pokemon);
+  console.log(filteredPokemon);
+  console.log(filterType);
+  console.log(finalFilterList);
+
   useEffect(() => {
     handleScroll();
     window.addEventListener("scroll", handleScroll);
@@ -40,7 +66,7 @@ const PokemonCardList = ({
   return (
     <div className="pkmn-cards">
       {finalFilterList && !(finalFilterList.length == 0)
-        ? finalFilterList.map((poke: any) => (
+        ? finalFilterList.map((poke: Pokemon) => (
             <article key={poke.id}>
               {poke.id < 10 ? (
                 <img
@@ -62,8 +88,8 @@ const PokemonCardList = ({
                 {poke.name} #{poke.id}
               </p>
               <div className="typebox">
-                {poke.type.map((kind: any) => (
-                  <p className={`type ${kind.toLowerCase()}`} key={kind.id}>
+                {poke.type.map((kind: PokemonType) => (
+                  <p className={`type ${kind.toLowerCase()}`} key={kind}>
                     {kind}
                   </p>
                 ))}
@@ -71,7 +97,7 @@ const PokemonCardList = ({
             </article>
           ))
         : filteredPokemon.length !== 0
-        ? filteredPokemon.map((poke: any) => (
+        ? filteredPokemon.map((poke: Pokemon) => (
             <article key={poke.id}>
               {poke.id < 10 ? (
                 <img
@@ -92,9 +118,9 @@ const PokemonCardList = ({
               <p className="nameNhash">
                 {poke.name} #{poke.id}
               </p>
-              <div key={poke.type} className="typebox">
-                {poke.type.map((kind: any) => (
-                  <p className={`type ${kind.toLowerCase()}`} key={kind.id}>
+              <div className="typebox">
+                {poke.type.map((kind: PokemonType) => (
+                  <p className={`type ${kind.toLowerCase()}`} key={kind}>
                     {kind}
                   </p>
                 ))}
@@ -102,9 +128,9 @@ const PokemonCardList = ({
             </article>
           ))
         : filteredPokemon.length == 0 && filterType
-        ? pokemon.map((poke: any) =>
-            poke.type.map((x: string) =>
-              filterType.includes(x) ? (
+        ? pokemon.map((poke: Pokemon) =>
+            poke.type.map((x: PokemonType) =>
+              filterType.typeArr.includes(x) ? (
                 <article key={poke.id}>
                   {poke.id < 10 ? (
                     <img
@@ -125,9 +151,9 @@ const PokemonCardList = ({
                   <p className="nameNhash">
                     {poke.name} #{poke.id}
                   </p>
-                  <div key={poke.type} className="typebox">
-                    {poke.type.map((kind: any) => (
-                      <p className={`type ${kind.toLowerCase()}`} key={kind.id}>
+                  <div className="typebox">
+                    {poke.type.map((kind: PokemonType) => (
+                      <p className={`type ${kind.toLowerCase()}`} key={kind}>
                         {kind}
                       </p>
                     ))}
