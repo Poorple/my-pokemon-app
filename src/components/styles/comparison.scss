@@ -143,17 +143,17 @@ h3{
             }
         }}
     }
-}
-.comparison-article{
-    display: flex;
-    flex-direction: column;
-    .central-piece{
-        width: 100%;
-        .graph-sect{
+    .comparison-article{
+        display: flex;
+        flex-direction: column;
+        .central-piece{
             width: 100%;
-        .graph{
-            width: 100%;
-        }
-    }}
-
+            .graph-sect{
+                width: 100%;
+            .graph{
+                width: 100%;
+            }
+        }}
+    
+    }
 }
