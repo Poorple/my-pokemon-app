@@ -1,9 +1,4 @@
-@font-face {
-    font-family: "Pixel";
-    src: url(/src/fonts/Minecraft.ttf);
-}
 .button-filter {
-  margin-top:1rem;
   appearance: none;
   background-color: aliceblue;
   border: 2px solid #1A1A1A;
@@ -11,7 +6,6 @@
   box-sizing: border-box;
   color: #3B3B3B;
   cursor: pointer;
-  font-family: "Pixel";
   font-size: 1rem;
   line-height: normal;
   margin: 0;

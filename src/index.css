@@ -1,0 +1,5 @@
+@font-face {
+    font-family: "Pixel";
+    src: url(/src/fonts/Minecraft.ttf);
+}
+*{font-family: "Pixel";}

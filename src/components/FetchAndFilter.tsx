@@ -3,21 +3,10 @@ import axios from "axios";
 import PokemonCardListComponent from "./PokemonCardListComponent";
 import "./styles/pokemon-card-style.css";
 import TypeFilter from "./TypeFilter";
+import { PokeInfo, Pokemon } from "./Interfaces";
 
 const FetchAndFilter = () => {
-  interface Pkmn {
-    id: number;
-    name: string;
-    type: string[];
-    hp: number;
-    attack: number;
-    defense: number;
-    spattack: number;
-    spdefense: number;
-    speed: number;
-  }
-
-  const [pokemon, setPokemon] = useState<Pkmn[]>([]);
+  const [pokemon, setPokemon] = useState<Pokemon[]>([]);
   const fetchData = async () => {
     try {
       const url =
@@ -25,20 +14,19 @@ const FetchAndFilter = () => {
       const response = await axios.get(url);
       const jsonData = response.data;
 
-      const fetchedPokemon: Pkmn[] = jsonData.map((item: any) => ({
+      const fetchedPokemon: Pokemon[] = jsonData.map((item: PokeInfo) => ({
         id: item.id,
         name: item.name.english,
         type: item.type,
-        hp: item.base[0],
-        attack: item.base[1],
-        defense: item.base[2],
-        spattack: item.base[3],
-        spdefense: item.base[4],
-        speed: item.base[5],
+        hp: item.base.HP,
+        attack: item.base.Attack,
+        defense: item.base.Defense,
+        spattack: item.base["Sp. Attack"],
+        spdefense: item.base["Sp. Defense"],
+        speed: item.base.Speed,
       }));
 
       setPokemon(fetchedPokemon);
-      console.log(fetchedPokemon);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -62,11 +50,11 @@ const FetchAndFilter = () => {
   };
 
   let pokemonToBeFiltered = pokemon;
-  let filteredPokemon: Pkmn[] = [];
-  let listIncludingType: Pkmn[] = [];
-  let finalFilterList: Pkmn[] = [];
-  const [theVeryBest, setTheVeryBest] = useState<Pkmn[]>();
-  const [inputFilter, setInputFilter] = useState<Pkmn[]>();
+  let filteredPokemon: Pokemon[] = [];
+  let listIncludingType: Pokemon[] = [];
+  let finalFilterList: Pokemon[] = [];
+  const [theVeryBest, setTheVeryBest] = useState<Pokemon[]>();
+  const [inputFilter, setInputFilter] = useState<Pokemon[]>();
 
   //If item contains input make an array of Pokemon containing input && if item contains type make an array of Pokemon containing type
   useEffect(() => {
@@ -88,17 +76,21 @@ const FetchAndFilter = () => {
   }, [debouncedInputValue, PokemonTypeFromTypeComponent]);
 
   //Filtered list of Pokemon checking type and input and creating new list containing both
-  const finalFilter = (filteredPokemon: Pkmn[], listIncludingType: Pkmn[]) => {
+  const finalFilter = (
+    filteredPokemon: Pokemon[],
+    listIncludingType: Pokemon[]
+  ) => {
     filteredPokemon.length === 0 || listIncludingType.length === 0
       ? (finalFilterList.length = 0)
       : null;
     filteredPokemon && listIncludingType
-      ? filteredPokemon.forEach((x: Pkmn) =>
+      ? filteredPokemon.forEach((x: Pokemon) =>
           listIncludingType.includes(x) ? finalFilterList.push(x) : null
         )
       : null;
     setTheVeryBest(finalFilterList);
     console.log(theVeryBest);
+    console.log(filteredPokemon);
   };
   // 1 second debounce/delay on input field
   useEffect(() => {
