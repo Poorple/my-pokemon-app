@@ -76,15 +76,14 @@ h3{
 }
 .stat-bar-div{
     display:flex;
+    align-items: center;
+        justify-content: center;
 }
     .central-piece{
-        display:flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        width: 100%;
         .graph-sect{
             display:flex;
-            flex-direction: row;
+            flex-direction: row;            
             .graph{
                 gap:1.5rem;
                 margin-top:0.9rem;
@@ -96,7 +95,7 @@ h3{
         section{
             display: flex;
             flex-direction: column;
-            width:20rem;
+            width:100%;
             span{    
                 display: inline-block; 
                 height: 1.5rem;
@@ -120,6 +119,7 @@ h3{
         
     }}
 }
+
 @media screen and (max-width:700px) {
     .search-containter{
         flex-direction: column;
@@ -156,4 +156,42 @@ h3{
         }}
     
     }
+}
+@media screen and (max-width:900px){
+    .search-containter{
+        flex-direction: column;
+        div:first-of-type, div:last-of-type{
+            margin:0;
+        }
+        div{
+        input{
+            width: 100%;
+            border-radius: 0;
+            box-shadow: 0 0 0 0;
+            background: aliceblue;
+        }
+        ul{
+            border-radius: 0px;
+            margin-top:6.7rem;
+            box-shadow: 0 0 0 0;
+            background: aliceblue;
+            li{
+                border-bottom: 1px solid black;
+            }
+        }}
+    }
+    .comparison-article{
+        grid-template-columns: 1fr auto;
+    }
+
+}
+@media screen and (max-width:1300px){
+    .comparison-article{
+        position: relative;
+        grid-template-columns: 1fr 1fr 1fr;
+        .central-piece{
+        .graph{
+            width: 10rem;
+        }
+    }}
 }

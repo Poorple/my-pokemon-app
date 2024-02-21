@@ -80,12 +80,11 @@ h3 {
 }
 .comparison-article .stat-bar-div {
   display: flex;
-}
-.comparison-article .central-piece {
-  display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+.comparison-article .central-piece {
+  width: 100%;
 }
 .comparison-article .central-piece .graph-sect {
   display: flex;
@@ -101,7 +100,7 @@ h3 {
 .comparison-article .central-piece section {
   display: flex;
   flex-direction: column;
-  width: 20rem;
+  width: 100%;
 }
 .comparison-article .central-piece section span {
   display: inline-block;
@@ -144,17 +143,52 @@ h3 {
   .search-containter div ul li {
     border-bottom: 1px solid black;
   }
+  .comparison-article {
+    display: flex;
+    flex-direction: column;
+  }
+  .comparison-article .central-piece {
+    width: 100%;
+  }
+  .comparison-article .central-piece .graph-sect {
+    width: 100%;
+  }
+  .comparison-article .central-piece .graph-sect .graph {
+    width: 100%;
+  }
 }
-.comparison-article {
-  display: flex;
-  flex-direction: column;
+@media screen and (max-width: 900px) {
+  .search-containter {
+    flex-direction: column;
+  }
+  .search-containter div:first-of-type, .search-containter div:last-of-type {
+    margin: 0;
+  }
+  .search-containter div input {
+    width: 100%;
+    border-radius: 0;
+    box-shadow: 0 0 0 0;
+    background: aliceblue;
+  }
+  .search-containter div ul {
+    border-radius: 0px;
+    margin-top: 6.7rem;
+    box-shadow: 0 0 0 0;
+    background: aliceblue;
+  }
+  .search-containter div ul li {
+    border-bottom: 1px solid black;
+  }
+  .comparison-article {
+    grid-template-columns: 1fr auto;
+  }
 }
-.comparison-article .central-piece {
-  width: 100%;
-}
-.comparison-article .central-piece .graph-sect {
-  width: 100%;
-}
-.comparison-article .central-piece .graph-sect .graph {
-  width: 100%;
+@media screen and (max-width: 1300px) {
+  .comparison-article {
+    position: relative;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .comparison-article .central-piece .graph {
+    width: 10rem;
+  }
 }/*# sourceMappingURL=comparison.css.map */
